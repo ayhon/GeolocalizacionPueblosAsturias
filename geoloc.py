@@ -8,8 +8,8 @@ from bs4 import BeautifulSoup
 from geopy.geocoders import Nominatim # Data form Open Street Map
                                       # Lim: 1 req/s
 
-debug = lambda *text : print(*text, file=sys.stderr)
-# debug = lambda *text : 1 # Do nothing
+# debug = lambda *text : print(*text, file=sys.stderr)
+debug = lambda *text : 1 # Do nothing
 
 debug(__name__)
 
@@ -23,27 +23,29 @@ def url2html(url,extra):
 
 def get_more_data(address):
     """ Get more data from pueblosdeasturias.es """
-    debug(address)
-    soup = BeautifulSoup(url2html(URL_SEARCH, address), "lxml")
-    results = soup.find("ul", "resultados")
-    info_link = results.find("a")["href"] # Only interested in firts result
-    debug(info_link)
 
-    scrape_soup = BeautifulSoup(url2html(URL, info_link), "lxml")
-    debug("scrape data")
-    data = scrape_soup.find("table","datos_pueblo").find("tbody")
-    debug(data)
+    debug("Pueblo:,",address)
+    soup = BeautifulSoup(url2html(URL_SEARCH, address), "lxml")
+    search_results = soup.find("ul", "resultados")
+    info_link = search_results.find("a")["href"] # Only interested in firts result
+    debug("Link con la información:",info_link)
 
     results = {}
-    for child in data.children:
-        if isinstance(child, bs4.NavigableString):
-            continue
-        key, value = [ x.text for x in child.children if not isinstance(x,bs4.NavigableString)]
-        results[key] = value
+    scrape_soup = BeautifulSoup(url2html(URL, info_link), "lxml")
+    tables = scrape_soup.find("section","widget").findAll("table","datos_pueblo")
+    for table in tables:
+        data = table.findAll("tr")
+        for row in data:
+            debug("Item:",row,"\nTipo:", type(row))
+            if isinstance(row, bs4.NavigableString):
+                continue # Parece que siempre son el primer y último elemento
+            debug("Children:",[ x.text for x in row.children if not isinstance(x,bs4.NavigableString)])
+            key, value = [ x.text for x in row.children if not isinstance(x,bs4.NavigableString)]
+            results[key] = value
 
+    # pprint("RESULTS:\n",results)
     return results
-
-
+    
 def get_coords(address):
     """ Get a place's latitude and longitude"""
     data = GEOLOCATER.geocode(address).raw
