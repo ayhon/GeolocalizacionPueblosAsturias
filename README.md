@@ -15,7 +15,9 @@ Como programa aislado, recibe como primer argumento el nombre del pueblo del que
 python3 geoloc.py Torio
 ```
 
-Como librería de python, las dos funciones interesantes son:
+Como librería de python, las funciones interesantes son:
+ * `get_info(pueblo)`  
+   Es una combinación de las dos funciones siguientes.
  * `get_coords(pueblo)`  
    Devuelve la latitud y longitud del pueblo `pueblo`
  * `get_more_data(pueblo)`
