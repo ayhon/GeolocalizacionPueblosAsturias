@@ -1,4 +1,5 @@
 import sys
+import time
 import json
 from urllib.parse import quote as encode
 
@@ -47,6 +48,7 @@ def get_more_data(address):
     
 def get_coords(address):
     """ Get a place's latitude and longitude"""
+    # time.sleep(1)
     data = GEOLOCATER.geocode(address).raw
     return {
             "Latitud": data["lat"],
