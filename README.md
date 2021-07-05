@@ -1,6 +1,10 @@
 # GeolocalizacionPueblosAsturias
 Pequeño script de python que usa tanto `OpenStreetMaps` como `puebosdeasturas.es` para sacar información de los pueblos de Asturias
 
+## Instalación
+
+Gestiono las dependencias del script usando `pipenv`. Para conseguir el mismo entorno, basta con hacer `pipenv install` en la carpeta del repositorio.
+
 ## Método de uso
 
 `geoloc.py` es el script en si. Se puede usar como una librería que importar en python, o como un programa aislado.
@@ -20,3 +24,7 @@ Como librería de python, las dos funciones interesantes son:
    * Concejo
    * Parroquia
    * Tipo
+   * Hombres
+   * Mujeres
+   * Viviendas
+   * Población
