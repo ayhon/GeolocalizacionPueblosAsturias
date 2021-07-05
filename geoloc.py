@@ -1,5 +1,5 @@
 import sys
-from pprint import pprint
+import json
 from urllib.parse import quote as encode
 
 import requests
@@ -43,7 +43,6 @@ def get_more_data(address):
             key, value = [ x.text for x in row.children if not isinstance(x,bs4.NavigableString)]
             results[key] = value
 
-    # pprint("RESULTS:\n",results)
     return results
     
 def get_coords(address):
@@ -65,7 +64,7 @@ def main(address):
     """Simple program to print data from an address"""
     if not address or address == "":
         raise TypeError("Proporciona una dirección como argumento, recibido \"" + address + "\"")
-    pprint(get_info(address))
+    print(json.dumps(get_info(address),indent=4))
 
 if __name__ == "__main__":
     main(" ".join(sys.argv[1:])) # Avoid script name
