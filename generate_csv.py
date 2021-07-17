@@ -36,7 +36,7 @@ def main():
 
     df = pd.DataFrame(result)
     print(df)
-    df.to_csv(f'pueblos_{comunidad}.csv')
+    df.to_csv(f'pueblos_{comunidad}.csv', sep=";")
 
 
 
