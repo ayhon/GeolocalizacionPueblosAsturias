@@ -1,4 +1,7 @@
 # GeolocalizacionPueblosAsturias
+
+###### Práctica propuesta y supervisada por Beatriz González Pérez, profesora de la Estadística del doble grado Ingeniería Informática y Matemáticas de la Facultad de Ciencias Matemáticas de la Universidad Complutense de Madrid
+
 Pequeño script de python que usa tanto `OpenStreetMaps` como `puebosdeasturas.es` para sacar información de los pueblos de Asturias
 
 ## Instalación
